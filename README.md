@@ -4,12 +4,13 @@
 
 A project I built over winter break. AI has gotten great at building frontends, but to be honest, they often look very similar and are based on training by said AI company. Persona is a drop in "Kit", "Care Package", or anything else you want to call it for your CLI, that supports the setup, building, and deployment of your personal website.
 
-![Persona Demo](public/demo.png)
+<img width="2366" height="1196" alt="image" src="https://github.com/user-attachments/assets/e25a8419-4892-488d-9795-c7d25ee85728" />
+
 
 ## Quick Start
 
 ```bash
-git clone https://github.com/JacbK/persona.git
+git clone https://github.com/JacbK/persona.git # Or click use template in the top right of this Github page
 cd persona
 ./setup.sh
 ```
@@ -32,15 +33,15 @@ That's it. The setup script walks you through everything:
 1. **You configure** — Name, links, which sections you want, design preferences
 2. **You upload** (optional) — Resume, headshot, project screenshots
 3. **AI researches** — Pulls from your GitHub, LinkedIn, materials
-4. **AI designs** — Creates a unique direction based on your taste
+4. **AI designs** — Creates a unique direction based on your taste using custom design skills
 5. **AI builds** — Writes the actual code from scratch
 6. **You deploy** — One command to go live
 
-The result isn't a filled-in template. It's a custom site that reflects who you actually are.
+The result isn't a filled-in template, its a custom site based on your selections that doesn't look like AI model training datasets.
 
 ## Add Your Materials (Optional)
 
-Drop files in `/materials` before running setup:
+Drop files in `/materials` before running setup or upload them during setup:
 
 ```
 materials/
@@ -49,8 +50,6 @@ materials/
 └── images/
     └── headshot.jpg     # Used in your portfolio
 ```
-
-PDFs are automatically converted to text so the AI can read them.
 
 ## After Setup
 
