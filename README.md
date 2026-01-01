@@ -10,7 +10,8 @@ A project I built over winter break. AI has gotten great at building frontends, 
 ## Quick Start
 
 ```bash
-git clone https://github.com/JacbK/persona.git # Or click use template in the top right of this Github page
+git clone https://github.com/JacbK/persona.git
+# Or click use template in the top right of this Github page (RECOMMENDED)
 cd persona
 ./setup.sh
 ```
