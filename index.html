@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persona</title>
+    <meta name="description" content="A care package for AI coding CLIs. Everything they need to build you a real portfolio.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="nav">
+        <a href="#" class="logo">Persona</a>
+        <div class="nav-right">
+            <div class="github-buttons">
+                <iframe src="https://ghbtns.com/github-btn.html?user=JacbK&repo=Persona&type=star&count=true" frameborder="0" scrolling="0" width="100" height="20" title="GitHub Stars"></iframe>
+            </div>
+            <a href="https://github.com/JacbK/Persona" class="nav-link" target="_blank">View on GitHub →</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="hero-label">A care package for</div>
+            <div class="hero-title-wrap">
+                <img src="claude.png" alt="" class="cli-logo" id="cli-logo">
+                <h1 class="hero-title" id="rotating-cli" style="color: #cc785c">Claude Code</h1>
+            </div>
+            <p class="hero-sub">Everything your AI CLI needs to build you a portfolio that doesn't look like everyone else's.</p>
+            <a href="https://github.com/JacbK/Persona" class="btn github-btn" target="_blank">
+                <svg height="20" width="20" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+                View on GitHub
+            </a>
+        </section>
+
+        <section class="terminal-section">
+            <pre class="terminal"><code>$ git clone github.com/JacbK/Persona
+$ cd Persona
+$ ./setup.sh
+<span class="dim">Installing dependencies...</span>
+<span class="dim">Opening config UI...</span>
+<span class="dim">Launching Claude Code...</span>
+<span class="green">› Build my portfolio</span></code></pre>
+        </section>
+
+        <section class="whats-inside">
+            <h2>What's inside</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Design system</h3>
+                    <p>Fonts that pair, colors that work, layouts that don't suck</p>
+                </div>
+                <div class="card">
+                    <h3>Content rules</h3>
+                    <p>So it doesn't write "passionate developer" anywhere</p>
+                </div>
+                <div class="card">
+                    <h3>Research instructions</h3>
+                    <p>Reads your GitHub, resume, and actually learns about you</p>
+                </div>
+                <div class="card">
+                    <h3>One-command setup</h3>
+                    <p>./setup.sh installs deps, opens config, launches your CLI</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="compat">
+            <p>Works with</p>
+            <div class="compat-logos">
+                <span class="compat-item"><img src="claude.png" alt="">Claude Code</span>
+                <span class="compat-item"><img src="gemini.png" alt="">Gemini CLI</span>
+                <span class="compat-item cursor-item"><img src="cursor.png" alt="">Cursor</span>
+                <span class="compat-item"><img src="openai.png" alt="">Codex</span>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <a href="https://github.com/JacbK/Persona" target="_blank">github.com/JacbK/Persona</a>
+    </footer>
+
+    <script>
+        const tools = [
+            { name: 'Claude Code', color: '#cc785c', logo: 'claude.png' },
+            { name: 'Gemini CLI', color: '#4285f4', logo: 'gemini.png' },
+            { name: 'Cursor', color: '#171717', logo: 'cursor.png' },
+            { name: 'Codex', color: '#10a37f', logo: 'openai.png' }
+        ];
+        let i = 0;
+        const textEl = document.getElementById('rotating-cli');
+        const logoEl = document.getElementById('cli-logo');
+
+        function rotate() {
+            i = (i + 1) % tools.length;
+            textEl.textContent = tools[i].name;
+            textEl.style.color = tools[i].color;
+            logoEl.src = tools[i].logo;
+        }
+
+        setInterval(rotate, 2200);
+    </script>
+</body>
+</html>
