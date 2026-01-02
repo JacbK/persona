@@ -311,13 +311,57 @@ echo ""
 echo -e "${BOLD}Step 4: AI Assistant${NC}"
 echo ""
 
-# Read CLI preference from profile.yaml
-CLI_TOOL="claude-code"
+# Read CLI preference from profile.yaml or prompt user to select
+CLI_TOOL=""
 if [ -f "profile.yaml" ]; then
     CLI_FROM_FILE=$(grep "^cli:" profile.yaml | sed 's/cli: *"\([^"]*\)".*/\1/' | tr -d ' ')
     if [ -n "$CLI_FROM_FILE" ]; then
         CLI_TOOL="$CLI_FROM_FILE"
     fi
+fi
+
+# If no CLI preference found, prompt user to select
+if [ -z "$CLI_TOOL" ]; then
+    echo -e "  ${BOLD}Which AI coding assistant will you use?${NC}"
+    echo ""
+    echo -e "    1) Claude Code ${DIM}(Anthropic)${NC}"
+    echo -e "    2) Gemini CLI ${DIM}(Google)${NC}"
+    echo -e "    3) Codex ${DIM}(OpenAI)${NC}"
+    echo -e "    4) Aider"
+    echo -e "    5) Cursor"
+    echo -e "    6) Other"
+    echo ""
+
+    # Detect installed CLIs to show recommendation
+    DETECTED=""
+    if command -v claude &> /dev/null; then
+        DETECTED="claude-code"
+    elif command -v gemini &> /dev/null; then
+        DETECTED="gemini"
+    elif command -v codex &> /dev/null; then
+        DETECTED="codex"
+    elif command -v aider &> /dev/null; then
+        DETECTED="aider"
+    fi
+
+    if [ -n "$DETECTED" ]; then
+        echo -e "  ${DIM}Detected: $DETECTED${NC}"
+    fi
+
+    read -p "  Select [1]: " cli_choice
+    cli_choice=${cli_choice:-1}
+
+    case "$cli_choice" in
+        1) CLI_TOOL="claude-code" ;;
+        2) CLI_TOOL="gemini" ;;
+        3) CLI_TOOL="codex" ;;
+        4) CLI_TOOL="aider" ;;
+        5) CLI_TOOL="cursor" ;;
+        6) CLI_TOOL="other" ;;
+        *) CLI_TOOL="claude-code" ;;
+    esac
+
+    echo ""
 fi
 
 echo -e "  Selected: ${CYAN}$CLI_TOOL${NC}"
