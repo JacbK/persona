@@ -45,10 +45,7 @@ materials/documents/*
 !materials/README.md
 
 # populated user data
-src/data/user.json
-profile.yaml
 .config-saved
-.agent/gemini_context.md
 
 # vercel
 .vercel

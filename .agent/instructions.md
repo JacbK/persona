@@ -120,12 +120,14 @@ src/
 
 ### Phase 5: Verify
 
-1. Run `npm run build` - must succeed
+1. Run `npm run build` - must succeed (this auto-clears the cache first)
 2. Run `npm run dev` - visually check the result
 3. Test responsive design (especially mobile)
 4. Fix any issues, rebuild until clean
 
 **Not done until `npm run build` succeeds.**
+
+**Cache Issue Recovery:** If you see "Cannot find module '../lightningcss.darwin-arm64.node'" or similar Turbopack errors, run `npm run clean` then retry. This can happen when many files are modified rapidly.
 
 ### Phase 6: Deploy
 

@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "dev:clean": "rm -rf .next && next dev",
+    "build": "rm -rf .next && next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "clean": "rm -rf .next"
   },
   "dependencies": {
     "@types/js-yaml": "^4.0.9",

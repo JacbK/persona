@@ -215,6 +215,9 @@ if [ "$NEED_CONFIG" = true ]; then
     echo -e "  ${CYAN}└───────────────────────────────────────────────┘${NC}"
     echo ""
 
+    # Clear .next cache before starting (prevents Turbopack/lightningcss corruption)
+    rm -rf .next
+
     # Start dev server in background
     npm run dev &>/dev/null &
     DEV_PID=$!
