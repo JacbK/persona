@@ -1,16 +1,21 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Fraunces, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import type { Metadata } from "next";
 
-const inter = Inter({
-  variable: "--font-sans",
+const fraunces = Fraunces({
   subsets: ["latin"],
-  display: "swap",
+  variable: "--font-fraunces",
+  axes: ["SOFT", "WONK", "opsz"], // Enable soft and wonky axes for personality
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space",
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "Personal portfolio",
+  title: "Jacob Kieser | Software Engineer",
+  description: "Crafting data platforms and digital experiences.",
 };
 
 export default function RootLayout({
@@ -19,10 +24,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <body
-        className={`${inter.variable} antialiased bg-neutral-950 text-neutral-100`}
-        suppressHydrationWarning
+        className={`${fraunces.variable} ${spaceGrotesk.variable} antialiased bg-[#0a1f1c] text-[#f2f0e4] selection:bg-[#ccff00] selection:text-[#0a1f1c]`}
       >
         {children}
       </body>

@@ -1,7 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  output: "export",
+  basePath: process.env.GITHUB_PAGES ? "/persona/creative-example" : "",
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;
