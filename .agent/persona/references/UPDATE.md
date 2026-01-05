@@ -8,11 +8,11 @@ For changes to an existing portfolio. Make targeted edits, don't rebuild.
 
 | Need | Skill |
 |------|-------|
-| Visual changes | `.agent/skills/design.md` |
-| Typography | `.agent/skills/fonts.md` |
-| Color palette | `.agent/skills/colors.md` |
-| Writing copy | `.agent/skills/content.md` |
-| Deploying | `.agent/skills/deploy.md` |
+| Visual changes | `.agent/skills/design/SKILL.md` |
+| Typography | `.agent/skills/fonts/SKILL.md` |
+| Color palette | `.agent/skills/colors/SKILL.md` |
+| Writing copy | `.agent/skills/content/SKILL.md` |
+| Deploying | `.agent/skills/deploy/SKILL.md` |
 
 ---
 

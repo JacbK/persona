@@ -1,3 +1,8 @@
+---
+name: design
+description: Create unique visual designs by synthesizing from inspirations and preferences. Covers typography, color, layout, spacing, and animation philosophy.
+---
+
 # Skill: Design
 
 Create a unique visual design by synthesizing from inspirations and preferences.

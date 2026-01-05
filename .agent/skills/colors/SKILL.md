@@ -1,3 +1,8 @@
+---
+name: colors
+description: Reference guide for portfolio color palettes. Includes quick vibe lookup, full palettes, and application guidelines using the 60-30-10 rule.
+---
+
 # Skill: Colors
 
 Reference guide for portfolio color palettes.

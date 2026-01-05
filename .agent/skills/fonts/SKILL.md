@@ -1,3 +1,8 @@
+---
+name: fonts
+description: Reference for selecting distinctive typography. Includes font recommendations by vibe, category, archetype, and pairing guidelines for Next.js projects.
+---
+
 # Skill: Fonts
 
 Reference for selecting distinctive typography. Avoid overused fonts (Helvetica, Arial, Roboto, Open Sans, Montserrat, Playfair Display, Poppins, Lato).

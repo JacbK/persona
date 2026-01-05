@@ -1,3 +1,8 @@
+---
+name: deploy
+description: Help users deploy their portfolio to production. Covers Vercel, Netlify, Cloudflare Pages, GitHub Pages, Docker, and MCP integration for AI-driven deployment.
+---
+
 # Skill: Deployment
 
 Help users deploy their portfolio to production.

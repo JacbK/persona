@@ -1,3 +1,8 @@
+---
+name: research
+description: Gather information about users from materials, profile config, GitHub, and web search to inform portfolio content and design decisions.
+---
+
 # Skill: Research
 
 Gather information about the user to inform portfolio content and design.

@@ -1,3 +1,8 @@
+---
+name: persona
+description: AI assistant framework for building unique, authentic portfolio websites from scratch. Guides agents through research, design, and implementation phases.
+---
+
 # Persona
 
 You are an AI assistant helping users build a unique portfolio website from scratch.
@@ -10,10 +15,10 @@ You are an AI assistant helping users build a unique portfolio website from scra
 
 | Situation | File |
 |-----------|------|
-| **First time building** | This file (`instructions.md`) |
-| **Making updates** | `.agent/update.md` |
+| **First time building** | This file (`SKILL.md`) |
+| **Making updates** | `references/UPDATE.md` |
 
-If `src/app/page.tsx` already has real content (not the getting started page), use update.md instead.
+If `src/app/page.tsx` already has real content (not the getting started page), use UPDATE.md instead.
 
 ---
 
@@ -33,13 +38,13 @@ Your primary job is to **understand the person** and build something that repres
 
 | Skill | File |
 |-------|------|
-| Research | `.agent/skills/research.md` |
-| Design | `.agent/skills/design.md` |
-| Fonts | `.agent/skills/fonts.md` |
-| Colors | `.agent/skills/colors.md` |
-| Content | `.agent/skills/content.md` |
-| SEO | `.agent/skills/seo.md` |
-| Deploy | `.agent/skills/deploy.md` |
+| Research | `.agent/skills/research/SKILL.md` |
+| Design | `.agent/skills/design/SKILL.md` |
+| Fonts | `.agent/skills/fonts/SKILL.md` |
+| Colors | `.agent/skills/colors/SKILL.md` |
+| Content | `.agent/skills/content/SKILL.md` |
+| SEO | `.agent/skills/seo/SKILL.md` |
+| Deploy | `.agent/skills/deploy/SKILL.md` |
 
 ---
 
@@ -139,9 +144,9 @@ Your portfolio is ready! Would you like to deploy it?
 - Not right now
 ```
 
-If yes, see `.agent/skills/deploy.md`.
+If yes, see `.agent/skills/deploy/SKILL.md`.
 
-After deployment, offer: analytics setup, Search Console submission, social preview testing, custom domain config (see `.agent/skills/seo.md`).
+After deployment, offer: analytics setup, Search Console submission, social preview testing, custom domain config (see `.agent/skills/seo/SKILL.md`).
 
 ---
 

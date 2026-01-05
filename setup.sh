@@ -33,7 +33,7 @@ EOF
 echo -e "${NC}"
 
 echo -e "${BOLD}Drop-in portfolio kit for AI coding agents${NC}"
-echo -e "${DIM}Works with Claude Code, Codex, Gemini CLI, Aider & more${NC}"
+echo -e "${DIM}Works with Claude Code, Gemini CLI, Codex, Cursor, Antigravity & more${NC}"
 echo ""
 
 cd "$PROJECT_DIR"
@@ -73,7 +73,7 @@ fi
 
 # Check for AI CLI
 CLI_FOUND=""
-for cli in claude codex gemini aider; do
+for cli in claude gemini codex; do
     if command -v $cli &> /dev/null; then
         CLI_FOUND="$cli"
         break
@@ -289,9 +289,10 @@ echo ""
 echo -e "    1) Claude Code ${DIM}(Anthropic)${NC}"
 echo -e "    2) Gemini CLI ${DIM}(Google)${NC}"
 echo -e "    3) Codex ${DIM}(OpenAI)${NC}"
-echo -e "    4) Aider"
-echo -e "    5) Cursor"
-echo -e "    6) Other"
+echo -e "    4) Cursor"
+echo -e "    5) Windsurf ${DIM}(Codeium)${NC}"
+echo -e "    6) Antigravity ${DIM}(Google)${NC}"
+echo -e "    7) Other ${DIM}(Aider, etc.)${NC}"
 echo ""
 
 # Detect installed CLIs to show which are available
@@ -305,10 +306,6 @@ fi
 if command -v codex &> /dev/null; then
     DETECTED_CLIS="${DETECTED_CLIS}codex "
 fi
-if command -v aider &> /dev/null; then
-    DETECTED_CLIS="${DETECTED_CLIS}aider "
-fi
-
 if [ -n "$DETECTED_CLIS" ]; then
     echo -e "  ${DIM}Detected:${NC} ${DETECTED_CLIS}"
 fi
@@ -319,11 +316,12 @@ case "$cli_choice" in
     1) CLI_TOOL="claude-code" ;;
     2) CLI_TOOL="gemini" ;;
     3) CLI_TOOL="codex" ;;
-    4) CLI_TOOL="aider" ;;
-    5) CLI_TOOL="cursor" ;;
-    6) CLI_TOOL="other" ;;
+    4) CLI_TOOL="cursor" ;;
+    5) CLI_TOOL="windsurf" ;;
+    6) CLI_TOOL="antigravity" ;;
+    7) CLI_TOOL="other" ;;
     *)
-        echo -e "  ${YELLOW}Invalid selection, please choose 1-6${NC}"
+        echo -e "  ${YELLOW}Invalid selection, please choose 1-7${NC}"
         exit 1
         ;;
 esac
@@ -351,13 +349,8 @@ case "$CLI_TOOL" in
             CLI_INSTALLED=true
         fi
         ;;
-    "aider")
-        if command -v aider &> /dev/null; then
-            CLI_INSTALLED=true
-        fi
-        ;;
-    "cursor")
-        CLI_INSTALLED=true  # Cursor opens manually
+    "cursor"|"windsurf"|"antigravity")
+        CLI_INSTALLED=true  # IDE - opens manually
         ;;
     *)
         CLI_INSTALLED=true  # Custom - user handles it
@@ -376,9 +369,6 @@ if [ "$CLI_INSTALLED" = false ]; then
             ;;
         "gemini")
             echo -e "  Install with: ${CYAN}npm install -g @google/gemini-cli${NC}"
-            ;;
-        "aider")
-            echo -e "  Install with: ${CYAN}pip install aider-chat${NC}"
             ;;
     esac
     echo ""
@@ -646,12 +636,6 @@ case "$CLI_TOOL" in
         fi
         echo ""
         ;;
-    "aider")
-        # Aider doesn't have native MCP client support
-        # It's a coding assistant, not an agent with tool use
-        echo -e "  ${DIM}Aider uses shell commands for deployment (no MCP needed)${NC}"
-        echo ""
-        ;;
 esac
 
 # ============================================
@@ -674,8 +658,8 @@ case "$CLI_TOOL" in
     "claude-code")
         echo -e "${CYAN}Starting Claude Code...${NC}"
         echo ""
-        echo -e "  ${DIM}When Claude starts, say:${NC}"
-        echo -e "  ${GREEN}\"Read .agent/instructions.md and build my portfolio\"${NC}"
+        echo -e "  $CHECK Instructions auto-loaded via CLAUDE.md"
+        echo -e "  ${DIM}Just say:${NC} ${GREEN}\"Build my portfolio\"${NC}"
         echo ""
         read -p "Press Enter to launch Claude..."
         exec claude
@@ -684,8 +668,8 @@ case "$CLI_TOOL" in
     "codex")
         echo -e "${CYAN}Starting Codex...${NC}"
         echo ""
-        echo -e "  ${DIM}When Codex starts, say:${NC}"
-        echo -e "  ${GREEN}\"Read .agent/instructions.md and build my portfolio\"${NC}"
+        echo -e "  $CHECK Instructions auto-loaded via AGENTS.md"
+        echo -e "  ${DIM}Just say:${NC} ${GREEN}\"Build my portfolio\"${NC}"
         echo ""
         read -p "Press Enter to launch Codex..."
         exec codex
@@ -694,38 +678,50 @@ case "$CLI_TOOL" in
     "gemini")
         echo -e "${CYAN}Starting Google Gemini CLI...${NC}"
         echo ""
-        
-        # Bundle instructions for Gemini
-        if [ -f "scripts/bundle-gemini-instructions.sh" ]; then
-            ./scripts/bundle-gemini-instructions.sh
-        fi
-
-        echo -e "  ${DIM}When Gemini starts, say:${NC}"
-        echo -e "  ${GREEN}\"Read .agent/gemini_context.md and build my portfolio\"${NC}"
+        echo -e "  $CHECK Instructions auto-loaded via GEMINI.md"
+        echo -e "  ${DIM}Just say:${NC} ${GREEN}\"Build my portfolio\"${NC}"
         echo ""
         read -p "Press Enter to launch Gemini..."
         exec gemini
         ;;
 
-    "aider")
-        echo -e "${CYAN}Starting Aider...${NC}"
-        echo ""
-        read -p "Press Enter to launch Aider..."
-        exec aider --read .agent/instructions.md
-        ;;
-
     "cursor")
-        echo -e "${CYAN}Opening Cursor AI...${NC}"
+        echo -e "${CYAN}Opening Cursor...${NC}"
         echo ""
-        echo -e "  ${DIM}Cursor requires manual interaction:${NC}"
-        echo -e "    1. Open this project in Cursor"
-        echo -e "    2. Read ${CYAN}.agent/instructions.md${NC}"
-        echo -e "    3. Say: ${GREEN}'Build my portfolio following these instructions'${NC}"
+        echo -e "  $CHECK Instructions auto-loaded via .cursorrules"
+        echo -e "  ${DIM}Just say:${NC} ${GREEN}\"Build my portfolio\"${NC}"
         echo ""
         if command -v cursor &> /dev/null; then
             cursor "$PROJECT_DIR"
         else
             echo -e "  ${YELLOW}Cursor not in PATH. Open the project manually.${NC}"
+        fi
+        ;;
+
+    "windsurf")
+        echo -e "${CYAN}Opening Windsurf...${NC}"
+        echo ""
+        echo -e "  ${DIM}Windsurf requires manual setup:${NC}"
+        echo -e "    1. Open this project in Windsurf"
+        echo -e "    2. Say: ${GREEN}\"Read .agent/persona/SKILL.md and build my portfolio\"${NC}"
+        echo ""
+        if command -v windsurf &> /dev/null; then
+            windsurf "$PROJECT_DIR"
+        else
+            echo -e "  ${YELLOW}Windsurf not in PATH. Open the project manually.${NC}"
+        fi
+        ;;
+
+    "antigravity")
+        echo -e "${CYAN}Opening Google Antigravity...${NC}"
+        echo ""
+        echo -e "  $CHECK Instructions auto-loaded via .antigravity/rules.md"
+        echo -e "  ${DIM}Just say:${NC} ${GREEN}\"Build my portfolio\"${NC}"
+        echo ""
+        if command -v antigravity &> /dev/null; then
+            antigravity "$PROJECT_DIR"
+        else
+            echo -e "  ${YELLOW}Antigravity not in PATH. Open the project manually.${NC}"
         fi
         ;;
 
@@ -735,7 +731,7 @@ case "$CLI_TOOL" in
         echo -e "  ${DIM}To use your AI tool:${NC}"
         echo -e "    1. Launch your preferred AI coding assistant"
         echo -e "    2. Open this project: ${CYAN}$PROJECT_DIR${NC}"
-        echo -e "    3. Say: ${GREEN}'Read .agent/instructions.md and build my portfolio'${NC}"
+        echo -e "    3. Say: ${GREEN}'Read .agent/persona/SKILL.md and build my portfolio'${NC}"
         echo ""
         ;;
 esac

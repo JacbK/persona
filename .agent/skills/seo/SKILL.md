@@ -1,3 +1,8 @@
+---
+name: seo
+description: Optimize portfolios for search engines and set up analytics. Covers meta tags, OG images, structured data, analytics options, and performance optimization.
+---
+
 # Skill: SEO & Analytics
 
 Optimize the portfolio for search engines and set up analytics to track visitors.

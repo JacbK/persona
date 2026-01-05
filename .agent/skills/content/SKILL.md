@@ -1,3 +1,8 @@
+---
+name: content
+description: Generate authentic, compelling copy for portfolios. Covers tone calibration, taglines, bios, project descriptions, and avoiding assumptions.
+---
+
 # Skill: Content Writing
 
 Generate authentic, compelling copy for portfolios.
