@@ -105,28 +105,47 @@ netlify deploy --prod --dir=.next
 
 **Note**: Requires static export, no server features.
 
-**Important**: You need your own GitHub repository first. If you cloned the Persona template, create your own repo:
+**CRITICAL PRE-FLIGHT**:
+1. **Check Remote**: Run `git remote -v`. If it points to `JacbK/persona` (the template), **REMOVE IT**.
+2. **Clean API**: Static export fails if `/api` routes exist. Run `rm -rf src/app/api src/app/config`.
+
+**Steps**:
+
+1. **Prepare Repo**:
 ```bash
-# Remove template remote and create your own repo
+# 1. Remove template remote (if exists)
 git remote remove origin
+
+# 2. Create NEW repository (replace 'my-portfolio' with your name)
 gh repo create my-portfolio --public --source=. --push
 ```
 
-**Steps**:
-1. Add to `next.config.ts`:
+2. **Configure `next.config.ts`**:
 ```typescript
 const nextConfig = {
   output: 'export',
-  images: { unoptimized: true }
+  images: { unoptimized: true },
+  // REQUIRED: match your repo name if not a user site
+  basePath: '/my-portfolio', 
 };
 ```
 
-2. Build:
+3. **Build & Push**:
 ```bash
+# Clean incompatible files
+rm -rf src/app/api src/app/config
+
+# Build locally to verify
 npm run build
+
+# Push
+git add .
+git commit -m "chore: prepare for static deployment"
+git push -u origin main
 ```
 
-3. Push to your repo and enable GitHub Pages in Settings → Pages → Source: GitHub Actions
+4. **Enable Pages**:
+   - Settings → Pages → Source: GitHub Actions
 
 ---
 

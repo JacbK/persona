@@ -144,7 +144,8 @@ Your portfolio is ready! Would you like to deploy it?
 - Not right now
 ```
 
-If yes, see `.agent/skills/deploy/SKILL.md`.
+If yes, **you MUST read and follow** `.agent/skills/deploy/SKILL.md`.
+**Do not skip this step.** It contains **CRITICAL PRE-FLIGHT CHECKS** (verifying git remote, removing `/api` routes) that are required to prevent deployment failures.
 
 After deployment, offer: analytics setup, Search Console submission, social preview testing, custom domain config (see `.agent/skills/seo/SKILL.md`).
 
