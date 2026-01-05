@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Persona</title>
-    <meta name="description" content="A care package for AI coding CLIs. Everything they need to build you a real portfolio.">
+    <title>Persona — Build Your Portfolio with AI</title>
+    <meta name="description" content="Build a unique portfolio website with AI. Works with Claude Code, Gemini CLI, Codex, Cursor, Antigravity, and more.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,15 +24,15 @@
 
     <main>
         <section class="hero">
-            <div class="hero-label">A care package for</div>
+            <div class="hero-label">Build your portfolio with</div>
             <div class="hero-title-wrap">
                 <img src="claude.png" alt="" class="cli-logo" id="cli-logo">
                 <h1 class="hero-title" id="rotating-cli" style="color: #cc785c">Claude Code</h1>
             </div>
-            <p class="hero-sub">Everything your AI CLI needs to build you a portfolio that doesn't look like everyone else's.</p>
+            <p class="hero-sub">A drop-in kit that gives AI everything it needs to build you a portfolio that actually looks like <em>you</em>.</p>
             <a href="https://github.com/JacbK/Persona" class="btn github-btn" target="_blank">
                 <svg height="20" width="20" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
-                View on GitHub
+                Get Started
             </a>
         </section>
 
@@ -42,7 +42,7 @@ $ cd Persona
 $ ./setup.sh
 <span class="dim">Installing dependencies...</span>
 <span class="dim">Opening config UI...</span>
-<span class="dim">Launching Claude Code...</span>
+<span class="dim">Launching AI assistant...</span>
 <span class="green">› Build my portfolio</span></code></pre>
         </section>
 
@@ -62,8 +62,8 @@ $ ./setup.sh
                     <p>Reads your GitHub, resume, and actually learns about you</p>
                 </div>
                 <div class="card">
-                    <h3>One-command setup</h3>
-                    <p>./setup.sh installs deps, opens config, launches your CLI</p>
+                    <h3>Auto-discovery</h3>
+                    <p>Your AI assistant finds the instructions automatically</p>
                 </div>
             </div>
         </section>
@@ -73,8 +73,10 @@ $ ./setup.sh
             <div class="compat-logos">
                 <span class="compat-item"><img src="claude.png" alt="">Claude Code</span>
                 <span class="compat-item"><img src="gemini.png" alt="">Gemini CLI</span>
-                <span class="compat-item cursor-item"><img src="cursor.png" alt="">Cursor</span>
                 <span class="compat-item"><img src="openai.png" alt="">Codex</span>
+                <span class="compat-item cursor-item"><img src="cursor.png" alt="">Cursor</span>
+                <span class="compat-item"><img src="antigravity.png" alt="">Antigravity</span>
+                <span class="compat-item"><img src="windsurf.png" alt="">Windsurf</span>
             </div>
         </section>
     </main>
@@ -87,8 +89,10 @@ $ ./setup.sh
         const tools = [
             { name: 'Claude Code', color: '#cc785c', logo: 'claude.png' },
             { name: 'Gemini CLI', color: '#4285f4', logo: 'gemini.png' },
+            { name: 'Codex', color: '#10a37f', logo: 'openai.png' },
             { name: 'Cursor', color: '#171717', logo: 'cursor.png' },
-            { name: 'Codex', color: '#10a37f', logo: 'openai.png' }
+            { name: 'Antigravity', color: '#4285f4', logo: 'antigravity.png' },
+            { name: 'Windsurf', color: '#00d4aa', logo: 'windsurf.png' }
         ];
         let i = 0;
         const textEl = document.getElementById('rotating-cli');
