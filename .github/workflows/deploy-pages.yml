@@ -11,7 +11,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [main, creative-example]
   workflow_dispatch:
 
 permissions:
@@ -27,26 +27,46 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: main
+
+      - name: Checkout creative-example branch
+        uses: actions/checkout@v4
+        with:
+          ref: creative-example
+          path: creative-example
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Build main site
+        working-directory: main
+        run: |
+          npm ci
+          npm run build
 
-      - name: Build
-        run: npm run build
-        env:
-          GITHUB_PAGES_BASE_PATH: /${{ github.event.repository.name }}
+      - name: Build creative-example site
+        working-directory: creative-example
+        run: |
+          npm ci
+          GITHUB_PAGES=true npm run build
+
+      - name: Combine outputs
+        run: |
+          mkdir -p combined
+          cp -r main/out/* combined/
+          mkdir -p combined/creative-example
+          cp -r creative-example/out/* combined/creative-example/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out
+          path: ./combined
 
   deploy:
     environment:
