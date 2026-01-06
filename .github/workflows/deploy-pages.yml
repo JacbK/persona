@@ -1,13 +1,13 @@
-# Deploy creative-example to GitHub Pages
+# Deploy to GitHub Pages
 #
-# Deploys the creative-example branch to /persona/creative-example
-# with a redirect at the root
+# - Root (/) serves content from gh-pages branch
+# - /creative-example serves the built creative-example branch
 
 name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [creative-example]
+    branches: [creative-example, gh-pages]
   workflow_dispatch:
 
 permissions:
@@ -23,38 +23,36 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout gh-pages branch (root content)
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages
+
       - name: Checkout creative-example branch
         uses: actions/checkout@v4
+        with:
+          ref: creative-example
+          path: creative-example
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
 
       - name: Build creative-example site
-        run: GITHUB_PAGES=true npm run build
+        working-directory: creative-example
+        run: |
+          npm ci
+          GITHUB_PAGES=true npm run build
 
       - name: Prepare deployment
         run: |
+          mkdir -p deploy
+          cp -r gh-pages/* deploy/
+          rm -rf deploy/creative-example
           mkdir -p deploy/creative-example
-          cp -r out/* deploy/creative-example/
-          cat > deploy/index.html << 'EOF'
-          <!DOCTYPE html>
-          <html>
-          <head>
-            <meta charset="utf-8">
-            <meta http-equiv="refresh" content="0; url=creative-example/">
-            <title>Redirecting...</title>
-          </head>
-          <body>
-            <p>Redirecting to <a href="creative-example/">creative-example</a>...</p>
-          </body>
-          </html>
-          EOF
+          cp -r creative-example/out/* deploy/creative-example/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
