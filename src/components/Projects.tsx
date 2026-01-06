@@ -14,17 +14,17 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: "Persona",
-    description: "An AI-native framework for building authentic, unique developer portfolios. It rejects templates in favor of generated designs based on personality archetypes.",
-    tags: ["TypeScript", "Next.js", "AI Agents", "Tailwind"],
-    github: "https://github.com/JacbK/persona",
+    title: "Spectral",
+    description: "A modular design system toolkit for building consistent, accessible interfaces. Features dynamic theming, component libraries, and real-time design token synchronization.",
+    tags: ["Design Systems", "React", "Figma", "Storybook"],
+    github: "https://github.com/mayarodriguez/spectral",
     color: "var(--color-accent)",
   },
   {
-    title: "Vetera",
-    description: "An AI-powered veterinary assistant simplifying pet healthcare. It provides 24/7 access to medical records, automated scheduling, and personalized health insights for pet parents.",
-    tags: ["AI", "HealthTech", "Product Design"],
-    link: "https://veteravet.com",
+    title: "Flowstate",
+    description: "A productivity app designed for creative professionals. Combines task management, time blocking, and focus sessions with beautiful, distraction-free interfaces.",
+    tags: ["iOS", "Product Design", "SwiftUI"],
+    link: "https://flowstate.app",
     color: "var(--color-secondary)",
   },
 ];

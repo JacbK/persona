@@ -14,8 +14,8 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Jacob Kieser | Software Engineer",
-  description: "Crafting data platforms and digital experiences.",
+  title: "Maya Rodriguez | Product Designer",
+  description: "Crafting intuitive interfaces and design systems at scale.",
 };
 
 export default function RootLayout({

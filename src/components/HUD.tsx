@@ -59,7 +59,7 @@ export default function HUD() {
 
       <div className="flex items-center gap-1 pl-2">
         <a
-          href="mailto:jacobk2112@gmail.com"
+          href="mailto:hello@mayarodriguez.design"
           className="p-2 hover:bg-[#f2f0e4]/10 rounded-full transition-colors group relative"
         >
           <Mail className="w-5 h-5 text-[#f2f0e4] group-hover:text-accent transition-colors" />
@@ -68,7 +68,7 @@ export default function HUD() {
           </span>
         </a>
         <button
-            onClick={() => window.open('https://github.com/JacbK', '_blank')}
+            onClick={() => window.open('https://github.com/mayarodriguez', '_blank')}
             className="p-2 hover:bg-[#f2f0e4]/10 rounded-full transition-colors group relative"
         >
            <Command className="w-5 h-5 text-[#f2f0e4] group-hover:text-secondary transition-colors" />

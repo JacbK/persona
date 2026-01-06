@@ -20,11 +20,11 @@ export default function Contact() {
         </h2>
 
         <a
-          href="mailto:jacobk2112@gmail.com"
+          href="mailto:hello@mayarodriguez.design"
           className="inline-block relative group"
         >
           <span className="font-mono text-xl md:text-2xl text-[#f2f0e4] group-hover:text-accent transition-colors duration-300">
-            jacobk2112@gmail.com
+            hello@mayarodriguez.design
           </span>
           <span className="absolute -bottom-2 left-0 w-full h-px bg-[#f2f0e4]/30 group-hover:bg-accent transition-colors duration-300" />
           <span className="absolute -bottom-2 left-0 w-0 h-px bg-accent group-hover:w-full transition-all duration-500 ease-out" />
@@ -32,7 +32,7 @@ export default function Contact() {
       </motion.div>
 
       <footer className="mt-32 pt-8 border-t border-[#f2f0e4]/10 flex flex-col md:flex-row items-center justify-between text-[#f2f0e4]/40 font-mono text-xs">
-        <p>&copy; {new Date().getFullYear()} Jacob Kieser.</p>
+        <p>&copy; {new Date().getFullYear()} Maya Rodriguez.</p>
         <p>System Status: <span className="text-accent">OPERATIONAL</span></p>
       </footer>
     </section>

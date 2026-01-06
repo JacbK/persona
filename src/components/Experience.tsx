@@ -41,24 +41,24 @@ export default function Experience() {
 
             <div className="flex flex-col md:flex-row md:items-baseline gap-4 mb-6">
               <h3 className="font-serif text-4xl md:text-5xl text-[#f2f0e4]">
-                Palantir
+                Stripe
               </h3>
               <span className="font-mono text-secondary text-sm">
-                Forward Deployed Software Engineer, Warp Speed
+                Staff Product Designer, Dashboard
               </span>
             </div>
 
             <p className="font-sans text-lg md:text-xl text-[#f2f0e4]/80 leading-relaxed max-w-2xl mb-8">
-              Deploying <span className="text-accent">AI solutions</span> to help teams increase productivity and operational capacity.
-              Building tools that bridge complex systems with intelligent automation.
+              Leading <span className="text-accent">design systems</span> for Stripe's merchant dashboard.
+              Shaping how millions of businesses understand their financial data.
             </p>
 
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
               {[
-                "AI-powered tooling",
-                "Data reconciliation systems",
-                "LLM integrations",
-                "Industrial tech",
+                "Design systems architecture",
+                "Data visualization",
+                "Cross-platform consistency",
+                "Accessibility standards",
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3 font-mono text-sm text-[#f2f0e4]/60">
                   <ArrowRight className="w-4 h-4 text-accent shrink-0 mt-0.5" />
@@ -93,24 +93,24 @@ export default function Experience() {
 
             <div className="flex flex-col md:flex-row md:items-baseline gap-4 mb-6">
               <h3 className="font-serif text-4xl md:text-5xl text-[#f2f0e4]">
-                Uber
+                Figma
               </h3>
               <span className="font-mono text-secondary text-sm">
-                Software Engineer, Competitive Intelligence
+                Senior Product Designer, FigJam
               </span>
             </div>
 
             <p className="font-sans text-lg md:text-xl text-[#f2f0e4]/80 leading-relaxed max-w-2xl mb-8">
-              Helped architect the <span className="text-accent">Ingestion Platform</span> powering Uber's competitive strategy.
-              Transformed diverse datasets into actionable intelligence metrics.
+              Designed core features for <span className="text-accent">FigJam</span>, Figma's collaborative whiteboard tool.
+              Grew the product from beta to millions of active users.
             </p>
 
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
               {[
-                "High-throughput data pipelines",
-                "Metric synthesis & transformation",
-                "AI-assisted developer workflows",
-                "400+ data source integrations",
+                "Real-time collaboration UX",
+                "Widget & plugin ecosystem",
+                "Interactive prototyping",
+                "Team workshop templates",
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3 font-mono text-sm text-[#f2f0e4]/60">
                   <ArrowRight className="w-4 h-4 text-accent shrink-0 mt-0.5" />

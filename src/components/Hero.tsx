@@ -24,7 +24,7 @@ export default function Hero() {
           <div className="flex items-center gap-2 px-3 py-1 border border-accent/30 rounded-full bg-accent/5 backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
             <span className="font-mono text-xs tracking-widest text-accent uppercase">
-              Online • Seattle
+              Online • Austin
             </span>
           </div>
         </motion.div>
@@ -35,10 +35,10 @@ export default function Hero() {
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="font-serif text-[12vw] leading-[0.8] tracking-tighter text-[#f2f0e4]"
         >
-          JACOB
+          MAYA
           <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#f2f0e4] to-[#f2f0e4]/50">
-            KIESER
+            RODRIGUEZ
           </span>
         </motion.h1>
 
@@ -49,12 +49,12 @@ export default function Hero() {
           className="mt-8 flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12"
         >
           <p className="font-mono text-sm md:text-base text-accent tracking-widest uppercase">
-            // Software Engineer
+            // Product Designer
           </p>
           <span className="hidden md:block w-px h-4 bg-[#f2f0e4]/20" />
           <p className="font-sans text-[#f2f0e4]/60 max-w-md text-sm md:text-base leading-relaxed text-balance">
-            Building high-fidelity data platforms and digital experiences.
-            Currently a Forward Deployed Engineer at <span className="text-white font-medium">Palantir</span>.
+            Crafting intuitive interfaces and design systems at scale.
+            Currently a Staff Designer at <span className="text-white font-medium">Stripe</span>.
           </p>
         </motion.div>
       </div>
