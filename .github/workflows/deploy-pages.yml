@@ -1,17 +1,13 @@
-# Deploy to GitHub Pages (static export)
+# Deploy creative-example to GitHub Pages
 #
-# Setup:
-# 1. Go to repo Settings → Pages
-# 2. Source: GitHub Actions
-# 3. Ensure next.config.ts has: output: 'export'
-#
-# Note: This uses static export, so no server features (API routes, etc.)
+# Deploys the creative-example branch to /persona/creative-example
+# with a redirect at the root
 
 name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main, creative-example]
+    branches: [creative-example]
   workflow_dispatch:
 
 permissions:
@@ -27,46 +23,43 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout main branch
-        uses: actions/checkout@v4
-        with:
-          ref: main
-          path: main
-
       - name: Checkout creative-example branch
         uses: actions/checkout@v4
-        with:
-          ref: creative-example
-          path: creative-example
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
 
-      - name: Build main site
-        working-directory: main
-        run: |
-          npm ci
-          npm run build
+      - name: Install dependencies
+        run: npm ci
 
       - name: Build creative-example site
-        working-directory: creative-example
-        run: |
-          npm ci
-          GITHUB_PAGES=true npm run build
+        run: GITHUB_PAGES=true npm run build
 
-      - name: Combine outputs
+      - name: Prepare deployment
         run: |
-          mkdir -p combined
-          cp -r main/out/* combined/
-          mkdir -p combined/creative-example
-          cp -r creative-example/out/* combined/creative-example/
+          mkdir -p deploy/creative-example
+          cp -r out/* deploy/creative-example/
+          cat > deploy/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="utf-8">
+            <meta http-equiv="refresh" content="0; url=creative-example/">
+            <title>Redirecting...</title>
+          </head>
+          <body>
+            <p>Redirecting to <a href="creative-example/">creative-example</a>...</p>
+          </body>
+          </html>
+          EOF
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./combined
+          path: ./deploy
 
   deploy:
     environment:
