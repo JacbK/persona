@@ -442,7 +442,7 @@ export default function ConfigPage() {
                     <option value="gemini">Google Gemini CLI</option>
                     <option value="aider">Aider</option>
                     <option value="cursor">Cursor AI</option>
-                    <option value="windsurf">Windsurf</option>
+                    <option value="devin">Devin CLI</option>
                     <option value="antigravity">Antigravity</option>
                     <option value="other">Other / Custom</option>
                   </select>

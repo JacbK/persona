@@ -173,7 +173,7 @@ printf '%s\n' '  1) Claude Code'
 printf '%s\n' '  2) Gemini CLI'
 printf '%s\n' '  3) Codex'
 printf '%s\n' '  4) Cursor'
-printf '%s\n' '  5) Windsurf'
+printf '%s\n' '  5) Devin CLI'
 printf '%s\n' '  6) Antigravity'
 printf '%s\n' '  7) Other'
 read -r -p '  Select: ' cli_choice
@@ -183,7 +183,7 @@ case "$cli_choice" in
   2) cli_name='Gemini CLI'; cli_command='gemini'; instruction_file='GEMINI.md' ;;
   3) cli_name='Codex'; cli_command='codex'; instruction_file='AGENTS.md' ;;
   4) cli_name='Cursor'; cli_command='cursor'; instruction_file='.cursorrules' ;;
-  5) cli_name='Windsurf'; cli_command='windsurf'; instruction_file='.agent/persona/SKILL.md' ;;
+  5) cli_name='Devin CLI'; cli_command='devin'; instruction_file='.agent/persona/SKILL.md' ;;
   6) cli_name='Antigravity'; cli_command='antigravity'; instruction_file='.antigravity/rules.md' ;;
   7) cli_name='your coding agent'; cli_command=''; instruction_file='.agent/persona/SKILL.md' ;;
   *) printf "  %b Choose a number from 1 to 7.\n" "$CROSS"; exit 1 ;;
@@ -204,7 +204,7 @@ if ! command -v "$cli_command" >/dev/null 2>&1; then
 fi
 
 read -r -p "  Press Enter to open $cli_name..."
-if [ "$cli_command" = 'cursor' ] || [ "$cli_command" = 'windsurf' ] || [ "$cli_command" = 'antigravity' ]; then
+if [ "$cli_command" = 'cursor' ] || [ "$cli_command" = 'antigravity' ]; then
   "$cli_command" "$PROJECT_DIR"
 else
   exec "$cli_command"
