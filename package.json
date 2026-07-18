@@ -2,34 +2,43 @@
   "name": "persona",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20.18.0"
+  },
   "scripts": {
-    "dev": "next dev",
-    "dev:clean": "rm -rf .next && next dev",
+    "dev": "next dev --hostname 127.0.0.1",
+    "dev:clean": "rm -rf .next && next dev --hostname 127.0.0.1",
     "build": "rm -rf .next && next build",
     "start": "next start",
     "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "setup:check": "bash ./setup.sh --check",
+    "check": "npm run lint && npm run typecheck && npm run test && npm run setup:check && npm run build",
+    "audit": "npm audit --audit-level=high",
     "clean": "rm -rf .next"
   },
   "dependencies": {
-    "@types/js-yaml": "^4.0.9",
-    "clsx": "^2.1.1",
-    "framer-motion": "^12.23.26",
-    "js-yaml": "^4.1.1",
-    "lucide-react": "^0.562.0",
-    "next": "16.1.0",
-    "pdf2json": "^3.1.4",
-    "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "js-yaml": "^5.2.1",
+    "lucide-react": "^1.25.0",
+    "next": "16.2.10",
+    "pdf2json": "^4.0.3",
+    "react": "19.2.7",
+    "react-dom": "19.2.7"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.1.0",
-    "lightningcss": "^1.24.1",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^22.20.1",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.2.10",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.10"
+  },
+  "overrides": {
+    "flatted": "3.4.2",
+    "postcss": "8.5.19"
   }
 }

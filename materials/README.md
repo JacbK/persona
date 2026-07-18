@@ -1,6 +1,8 @@
 # Materials Folder
 
-Drop your assets here before running the setup script. The AI will use these to build your portfolio.
+Add optional source material here. Your coding agent can use it to build a more accurate portfolio.
+
+Files stay in this repository. Review them before committing or pushing, especially if the repository is public. The local uploader accepts files up to 10 MB.
 
 ## What to Include
 
@@ -20,14 +22,14 @@ Keep filenames simple and descriptive:
 - ✅ `profile.jpg`, `ecommerce-app.png`, `resume.pdf`
 - ❌ `IMG_0234.jpg`, `Screenshot 2024-01-15 at 3.42.18 PM.png`
 
-## The AI Will
+## How your coding agent can use them
 
 1. Extract information from your resume
 2. Use your profile photo in the hero section
-3. Add project screenshots to the bento grid
+3. Add project screenshots where they fit the approved design
 4. Reference any bio or project descriptions you provide
-5. Generate missing content based on what it finds
+5. Ask about important gaps instead of inventing details
 
 ## Optional
 
-If you don't provide materials, the AI will work with just your GitHub/LinkedIn and generate everything from scratch. Materials just make it better.
+Materials are optional. Without them, your coding agent should use `profile.yaml` and ask for any important missing context.
