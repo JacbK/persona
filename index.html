@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Persona — Build Your Portfolio with AI</title>
-    <meta name="description" content="Build a unique portfolio website with AI. Works with Claude Code, Gemini CLI, Codex, Cursor, Antigravity, and more.">
+    <meta name="description" content="Build a unique portfolio website with AI. Works with Claude Code, Gemini CLI, Codex, Cursor, Devin CLI, Antigravity, and more.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,20 +29,20 @@
                 <img src="claude.png" alt="" class="cli-logo" id="cli-logo">
                 <h1 class="hero-title" id="rotating-cli" style="color: #cc785c">Claude Code</h1>
             </div>
-            <p class="hero-sub">A drop-in kit that gives AI everything it needs to build you a portfolio that actually looks like <em>you</em>.</p>
-            <a href="https://github.com/JacbK/Persona" class="btn github-btn" target="_blank">
+            <p class="hero-sub">A starter kit that gives your coding agent the context and guardrails to build a portfolio that feels like <em>you</em>.</p>
+            <a href="https://github.com/new?template_name=persona&template_owner=JacbK" class="btn github-btn" target="_blank">
                 <svg height="20" width="20" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
-                Get Started
+                Use this template
             </a>
         </section>
 
         <section class="terminal-section">
-            <pre class="terminal"><code>$ git clone github.com/JacbK/Persona
-$ cd Persona
+            <pre class="terminal"><code>$ git clone &lt;your-repository-url&gt;
+$ cd &lt;your-repository&gt;
 $ ./setup.sh
 <span class="dim">Installing dependencies...</span>
-<span class="dim">Opening config UI...</span>
-<span class="dim">Launching AI assistant...</span>
+<span class="dim">Opening your local setup page...</span>
+<span class="dim">Opening your coding agent...</span>
 <span class="green">› Build my portfolio</span></code></pre>
         </section>
 
@@ -50,20 +50,20 @@ $ ./setup.sh
             <h2>What's inside</h2>
             <div class="grid">
                 <div class="card">
-                    <h3>Design system</h3>
-                    <p>Fonts that pair, colors that work, layouts that don't suck</p>
+                    <h3>Local setup</h3>
+                    <p>Add your story, work, links, and visual taste in one place</p>
                 </div>
                 <div class="card">
-                    <h3>Content rules</h3>
-                    <p>So it doesn't write "passionate developer" anywhere</p>
+                    <h3>Design process</h3>
+                    <p>Your agent proposes a direction before it starts building</p>
                 </div>
                 <div class="card">
-                    <h3>Research instructions</h3>
-                    <p>Reads your GitHub, resume, and actually learns about you</p>
+                    <h3>Built-in checks</h3>
+                    <p>Responsive, accessible, and production checks are part of the workflow</p>
                 </div>
                 <div class="card">
-                    <h3>Auto-discovery</h3>
-                    <p>Your AI assistant finds the instructions automatically</p>
+                    <h3>Agent instructions</h3>
+                    <p>Works with the coding agents you already use</p>
                 </div>
             </div>
         </section>
@@ -76,7 +76,7 @@ $ ./setup.sh
                 <span class="compat-item"><img src="openai.png" alt="">Codex</span>
                 <span class="compat-item cursor-item"><img src="cursor.png" alt="">Cursor</span>
                 <span class="compat-item"><img src="antigravity.png" alt="">Antigravity</span>
-                <span class="compat-item"><img src="windsurf.png" alt="">Windsurf</span>
+                <span class="compat-item"><img src="devin.svg" alt="">Devin CLI</span>
             </div>
         </section>
     </main>
@@ -92,7 +92,7 @@ $ ./setup.sh
             { name: 'Codex', color: '#10a37f', logo: 'openai.png' },
             { name: 'Cursor', color: '#171717', logo: 'cursor.png' },
             { name: 'Antigravity', color: '#4285f4', logo: 'antigravity.png' },
-            { name: 'Windsurf', color: '#00d4aa', logo: 'windsurf.png' }
+            { name: 'Devin CLI', color: '#171717', logo: 'devin.svg' }
         ];
         let i = 0;
         const textEl = document.getElementById('rotating-cli');

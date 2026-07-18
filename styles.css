@@ -288,6 +288,10 @@ footer a:hover {
         gap: 0.75rem;
     }
 
+    .hero-title {
+        font-size: clamp(2.25rem, 11vw, 3rem);
+    }
+
     .cli-logo {
         height: 48px;
         width: 48px;
