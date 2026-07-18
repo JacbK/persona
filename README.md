@@ -30,7 +30,7 @@ Requirements: Node.js 20.18 or newer, npm, Git, and a coding agent.
 
 ## Supported coding agents
 
-Persona includes auto-discovered instructions for Claude Code, Gemini CLI, Codex, Cursor, and Antigravity. Windsurf and other agents can read `.agent/persona/SKILL.md` directly.
+Persona includes auto-discovered instructions for Claude Code, Gemini CLI, Codex, Cursor, and Antigravity. Devin and other agents can read `.agent/persona/SKILL.md` directly.
 
 Persona does not install agents, edit global agent settings, or ask for access tokens. Install and sign in to your chosen agent through its official instructions.
 

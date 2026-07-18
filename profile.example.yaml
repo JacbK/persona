@@ -6,7 +6,7 @@
 # REQUIRED: Basic Info
 # ========================================
 name: "Your Name"  # REQUIRED - your full name
-cli: "claude-code"  # REQUIRED - AI CLI tool (claude-code, codex, gemini, aider, cursor, other)
+cli: "claude-code"  # REQUIRED - AI CLI tool (claude-code, codex, gemini, aider, cursor, devin, antigravity, other)
 
 # ========================================
 # OPTIONAL: Contact & Social Links
