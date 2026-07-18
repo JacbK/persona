@@ -1,298 +1,17 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
-import { ArrowLeft, Download, Sparkles, Upload, FileText, Image, X, Check, Terminal, ArrowRight, ChevronRight, Loader2, Edit3 } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ArrowLeft, Download, Sparkles, Upload, FileText, Image as ImageIcon, X, Check, Terminal, ArrowRight, ChevronRight, Loader2, Edit3 } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { ARCHETYPE_EXAMPLES } from './inspirations';
+import { generateProfileYaml, type ProfileConfig } from '@/lib/profile-config';
 
 type ConfigStep = 'basics' | 'design' | 'review';
 
-const ARCHETYPE_EXAMPLES = [
-  {
-    id: 1,
-    name: 'Brutalist',
-    description: 'Sharp edges, monospace, high contrast',
-    color: 'from-neutral-900 to-neutral-800',
-    examples: [
-      {
-        name: 'Brutalist Web Design',
-        url: 'https://brutalist-web.design',
-        screenshot: '/inspirations/brutalist-web-design.png',
-        design: {
-          typography: 'System monospace, no custom fonts, 16px base',
-          colors: 'Pure black/white, no grays, high contrast',
-          layout: 'Single column, left-aligned, no grid, HTML default flow',
-          spacing: 'Minimal padding, browser defaults, dense',
-          motion: 'None - completely static',
-          details: 'No shadows, underlined links, raw HTML aesthetic'
-        }
-      },
-      {
-        name: 'Neobrutalism',
-        url: 'https://neobrutalism.dev',
-        screenshot: '/inspirations/neobrutalism.png',
-        design: {
-          typography: 'Bold sans-serif headers (800+ weight), monospace body',
-          colors: 'Black backgrounds, white text, neon accent (yellow/cyan)',
-          layout: 'Boxy cards, thick borders (4-8px), no border-radius',
-          spacing: 'Generous padding (24-48px), clear sections',
-          motion: 'Sharp snap animations, no easing curves',
-          details: 'Heavy drop shadows (8-12px), stark borders, grid-based'
-        }
-      },
-      {
-        name: 'Mono Company',
-        url: 'https://mono.company',
-        screenshot: '/inspirations/mono-company.png',
-        design: {
-          typography: 'Monospace everywhere (IBM Plex Mono), 14-16px',
-          colors: 'True monochrome (black/white/grays), no color',
-          layout: 'Fixed-width (1200px max), centered, strict grid',
-          spacing: 'Consistent 8px grid, mathematical spacing',
-          motion: 'Minimal hover states, fade transitions only',
-          details: 'Thin borders (1px), subtle shadows, pixel-perfect alignment'
-        }
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: 'Editorial',
-    description: 'Magazine layouts, serif headers',
-    color: 'from-amber-900 to-amber-800',
-    examples: [
-      {
-        name: 'NY Times',
-        url: 'https://www.nytimes.com',
-        screenshot: '/inspirations/nytimes.png',
-        design: {
-          typography: 'Georgia/Serif headers (28-48px), Sans body (16-18px)',
-          colors: 'Black text, white bg, minimal red accents',
-          layout: 'Multi-column grid, asymmetric breakup, sidebars',
-          spacing: 'Tight line-height (1.4), dense paragraph spacing',
-          motion: 'None - static content focus',
-          details: 'Thin divider lines (1px), occasional images, text-heavy'
-        }
-      },
-      {
-        name: 'The Pudding',
-        url: 'https://pudding.cool',
-        screenshot: '/inspirations/pudding.png',
-        design: {
-          typography: 'Bold serif headlines (60-80px), sans body (18-21px)',
-          colors: 'Vibrant accent colors, white/cream backgrounds',
-          layout: 'Asymmetric columns (70/30 split), overlapping elements',
-          spacing: 'Generous (100-200px section gaps), breathable',
-          motion: 'Scroll-triggered animations, data visualizations',
-          details: 'Large pull quotes, colored text blocks, image/text overlap'
-        }
-      },
-      {
-        name: 'The Verge',
-        url: 'https://www.theverge.com',
-        screenshot: '/inspirations/theverge.png',
-        design: {
-          typography: '__Optimist/serif headlines (32-56px), sans body (17px)',
-          colors: 'Black/white base, neon accent (hot pink/lime)',
-          layout: 'Card-based grid, featured hero, sidebar modules',
-          spacing: 'Moderate (40-60px gaps), card padding (24px)',
-          motion: 'Smooth image lazy-loads, hover scale effects',
-          details: 'Rounded cards (8px), soft shadows, category tags'
-        }
-      },
-    ],
-  },
-  {
-    id: 3,
-    name: 'Terminal',
-    description: 'Command-line aesthetic, CRT colors',
-    color: 'from-green-900 to-green-800',
-    examples: [
-      {
-        name: 'Terminal Sexy',
-        url: 'https://terminal.sexy',
-        screenshot: '/inspirations/terminal-sexy.png',
-        design: {
-          typography: 'Monospace (Fira Code/JetBrains), 14px fixed',
-          colors: 'Dark bg (#0d0d0d), green text (#00ff41), cursor blink',
-          layout: 'Fixed-width (80ch), single column, text-only',
-          spacing: 'Line-height 1.5, no padding, terminal default',
-          motion: 'Blinking cursor, typewriter effect on load',
-          details: 'ASCII borders, prompt symbols (>), CRT scanlines'
-        }
-      },
-      {
-        name: 'Robin Sloan',
-        url: 'https://www.robinsloan.com',
-        screenshot: '/inspirations/robin-sloan.png',
-        design: {
-          typography: 'Monospace (Courier/Consolas), 16px, serif fallback',
-          colors: 'Black bg, white text, no colors',
-          layout: 'Narrow column (60ch), left-aligned, essay format',
-          spacing: 'Generous line-height (1.8), wide margins',
-          motion: 'None - reading-focused',
-          details: 'Underlined links, minimal decoration, text-first'
-        }
-      },
-      {
-        name: 'GitHub',
-        url: 'https://github.com',
-        screenshot: '/inspirations/github.png',
-        design: {
-          typography: 'Monospace code (SF Mono), sans UI (14px)',
-          colors: 'Dark mode (#0d1117), white text, blue accents',
-          layout: 'File tree sidebar, content main, 3-column',
-          spacing: 'Compact (8-16px gaps), dense information',
-          motion: 'Instant transitions, no delays',
-          details: 'Syntax highlighting, line numbers, code blocks'
-        }
-      },
-    ],
-  },
-  {
-    id: 4,
-    name: 'Retro Arcade',
-    description: 'Pixel fonts, neon colors, 8-bit',
-    color: 'from-fuchsia-900 to-purple-900',
-    examples: [
-      {
-        name: 'Poolsuite',
-        url: 'https://poolsuite.net',
-        screenshot: '/inspirations/poolsuite.png',
-        design: {
-          typography: 'Rounded sans (Comic Sans-adjacent), 16-20px, playful',
-          colors: 'Pastel (pink/blue/yellow), gradients, retro palette',
-          layout: 'Centered cards, floating elements, sticker aesthetic',
-          spacing: 'Varied (24-80px), playful asymmetry',
-          motion: 'Wobble animations, parallax scrolling, float effects',
-          details: 'Soft shadows, rounded corners (16-24px), illustrations'
-        }
-      },
-      {
-        name: 'Bruno Simon',
-        url: 'https://bruno-simon.com',
-        screenshot: '/inspirations/bruno-simon.png',
-        design: {
-          typography: 'Bold sans-serif, 14-18px, clean UI',
-          colors: 'Dark bg, white text, colorful 3D elements',
-          layout: '3D canvas full-screen, minimal UI overlay',
-          spacing: 'UI elements: compact (12-16px), spacious canvas',
-          motion: '3D physics, interactive elements, smooth 60fps',
-          details: 'WebGL rendering, car/road metaphor, gamified'
-        }
-      },
-      {
-        name: 'Windows 93',
-        url: 'https://www.windows93.net',
-        screenshot: '/inspirations/windows93.png',
-        design: {
-          typography: 'Pixel font (Press Start 2P), 8-12px, bitmap',
-          colors: 'Neon (magenta/cyan/yellow), black bg, high saturation',
-          layout: 'OS window metaphor, draggable windows, desktop UI',
-          spacing: 'Pixelated 8px grid, retro OS spacing',
-          motion: 'Glitch effects, cursor trails, animated backgrounds',
-          details: 'Pixel art icons, window chrome, 90s nostalgia'
-        }
-      },
-    ],
-  },
-  {
-    id: 5,
-    name: 'Geometric',
-    description: 'Color blocking, shapes, bold',
-    color: 'from-blue-900 to-blue-800',
-    examples: [
-      {
-        name: 'Linear',
-        url: 'https://linear.app',
-        screenshot: '/inspirations/linear.png',
-        design: {
-          typography: 'Inter/SF Pro, 14-16px, -0.02em tracking, 500 weight',
-          colors: 'True black (#000), white (#fff), purple accent (#5e6ad2)',
-          layout: 'Centered, max-width 1200px, symmetric grid',
-          spacing: 'Generous (80-120px sections), 40px padding',
-          motion: 'Subtle fades (200ms), smooth scroll, polished',
-          details: 'No borders, soft gradients, clean edges, minimal'
-        }
-      },
-      {
-        name: 'Stripe',
-        url: 'https://stripe.com',
-        screenshot: '/inspirations/stripe.png',
-        design: {
-          typography: 'Camphor/sans-serif, 16-18px, medium weight',
-          colors: 'White bg, black text, blue (#635bff) accent',
-          layout: 'Asymmetric hero, grid-based content, diagonal dividers',
-          spacing: 'Variable (60-100px), responsive scaling',
-          motion: 'Animated gradients, smooth scroll reveals',
-          details: 'Gradient meshes, geometric shapes, depth layers'
-        }
-      },
-      {
-        name: 'Vercel',
-        url: 'https://vercel.com',
-        screenshot: '/inspirations/vercel.png',
-        design: {
-          typography: 'Geist/mono hybrid, 14-16px, tight spacing',
-          colors: 'True black (#000), white (#fff), no color',
-          layout: 'Full-width sections, edge-to-edge, no max-width',
-          spacing: 'Extreme (120-200px section gaps), minimal padding',
-          motion: 'Fast (100ms), instant feedback, no delays',
-          details: 'Thin borders (1px), sharp corners, monochromatic'
-        }
-      },
-    ],
-  },
-  {
-    id: 6,
-    name: 'Luxury',
-    description: 'Elegant serifs, large whitespace',
-    color: 'from-stone-900 to-stone-800',
-    examples: [
-      {
-        name: 'Apple',
-        url: 'https://www.apple.com',
-        screenshot: '/inspirations/apple.png',
-        design: {
-          typography: 'SF Pro Display, 21-80px headlines, light/medium weights',
-          colors: 'White bg, black text, minimal color (product images)',
-          layout: 'Large hero images, centered text, single column flow',
-          spacing: 'Massive (150-300px gaps), generous padding',
-          motion: 'Smooth scrollytelling, parallax, video backgrounds',
-          details: 'High-res images, soft shadows, rounded corners (12px)'
-        }
-      },
-      {
-        name: 'Rolex',
-        url: 'https://www.rolex.com',
-        screenshot: '/inspirations/rolex.png',
-        design: {
-          typography: 'Serif headers (28-48px), light sans body (14-16px)',
-          colors: 'Black/white/gold (#d4af37), minimal palette',
-          layout: 'Narrow column (700px), centered, ample margins',
-          spacing: 'Luxurious (100-200px), single element focus',
-          motion: 'Slow fades (600ms), elegant transitions',
-          details: 'Elegant dividers, gold accents, serif details'
-        }
-      },
-      {
-        name: 'Bottega Veneta',
-        url: 'https://www.bottegaveneta.com',
-        screenshot: '/inspirations/bottega-veneta.png',
-        design: {
-          typography: 'Light serif (300 weight), 18-24px, letter-spacing +0.05em',
-          colors: 'Cream/beige bg, black text, earth tones',
-          layout: 'Image-first, minimal text overlay, editorial flow',
-          spacing: 'Extreme whitespace (200-400px), breathing room',
-          motion: 'Slow reveals (800ms), lazy image loads',
-          details: 'Thin borders, elegant typography, refined aesthetic'
-        }
-      },
-    ],
-  },
-];
 
 export default function ConfigPage() {
-  const [config, setConfig] = useState({
+  const [config, setConfig] = useState<ProfileConfig>({
     name: '',
     email: '',
     github: '',
@@ -335,13 +54,13 @@ export default function ConfigPage() {
   const [selectedExamples, setSelectedExamples] = useState<string[]>([]);
   const [uploadedFiles, setUploadedFiles] = useState<{ name: string; path: string; folder: string }[]>([]);
   const [isUploading, setIsUploading] = useState(false);
+  const [uploadError, setUploadError] = useState('');
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [configSaved, setConfigSaved] = useState(false);
   const [showDownloadHelp, setShowDownloadHelp] = useState(false);
   const [currentStep, setCurrentStep] = useState<ConfigStep>('basics');
   const [isLoading, setIsLoading] = useState(true);
   const [hasExistingConfig, setHasExistingConfig] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Load existing config on mount
   useEffect(() => {
@@ -352,6 +71,9 @@ export default function ConfigPage() {
 
         if (data.exists && data.config) {
           const c = data.config;
+          const enabledSections = Array.isArray(c.sections)
+            ? new Set<string>(c.sections)
+            : null;
           setHasExistingConfig(true);
 
           // Populate form with existing values
@@ -364,15 +86,15 @@ export default function ConfigPage() {
             website: c.website || '',
             cli: c.cli || 'claude-code',
             sections: {
-              hero: c.sections?.hero ?? true,
-              about: c.sections?.about ?? true,
-              experience: c.sections?.experience ?? true,
-              projects: c.sections?.projects ?? true,
-              skills: c.sections?.skills ?? false,
-              education: c.sections?.education ?? false,
-              contact: c.sections?.contact ?? true,
-              blog: c.sections?.blog ?? false,
-              testimonials: c.sections?.testimonials ?? false,
+              hero: enabledSections ? enabledSections.has('hero') : c.sections?.hero ?? true,
+              about: enabledSections ? enabledSections.has('about') : c.sections?.about ?? true,
+              experience: enabledSections ? enabledSections.has('experience') : c.sections?.experience ?? true,
+              projects: enabledSections ? enabledSections.has('projects') : c.sections?.projects ?? true,
+              skills: enabledSections ? enabledSections.has('skills') : c.sections?.skills ?? false,
+              education: enabledSections ? enabledSections.has('education') : c.sections?.education ?? false,
+              contact: enabledSections ? enabledSections.has('contact') : c.sections?.contact ?? true,
+              blog: enabledSections ? enabledSections.has('blog') : c.sections?.blog ?? false,
+              testimonials: enabledSections ? enabledSections.has('testimonials') : c.sections?.testimonials ?? false,
             },
             design: {
               creativity: c.design?.creativity ?? 5,
@@ -416,6 +138,7 @@ export default function ConfigPage() {
     if (!files || files.length === 0) return;
 
     setIsUploading(true);
+    setUploadError('');
 
     for (const file of Array.from(files)) {
       const formData = new FormData();
@@ -431,21 +154,34 @@ export default function ConfigPage() {
         if (res.ok) {
           const data = await res.json();
           setUploadedFiles(prev => [...prev, { name: data.name, path: data.path, folder }]);
+        } else {
+          const data = await res.json().catch(() => ({ error: 'Upload failed' }));
+          setUploadError(data.error || 'Upload failed');
         }
       } catch (err) {
         console.error('Upload failed:', err);
+        setUploadError('Upload failed. Check the local server and try again.');
       }
     }
 
     setIsUploading(false);
-    // Reset input
-    if (fileInputRef.current) {
-      fileInputRef.current.value = '';
-    }
+    e.target.value = '';
   };
 
-  const removeUploadedFile = (path: string) => {
-    setUploadedFiles(prev => prev.filter(f => f.path !== path));
+  const removeUploadedFile = async (path: string) => {
+    setUploadError('');
+    const res = await fetch('/api/upload-material', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ path }),
+    });
+
+    if (res.ok) {
+      setUploadedFiles(prev => prev.filter(f => f.path !== path));
+    } else {
+      const data = await res.json().catch(() => ({ error: 'Delete failed' }));
+      setUploadError(data.error || 'Delete failed');
+    }
   };
 
   const toggleExample = (url: string) => {
@@ -454,166 +190,8 @@ export default function ConfigPage() {
     );
   };
 
-  // Parse design attributes from text descriptions into structured values
-  const parseDesignAttributes = (design: {
-    typography: string;
-    colors: string;
-    layout: string;
-    spacing: string;
-    motion: string;
-    details: string;
-  }) => {
-    // Extract font family (first font mentioned)
-    const fontMatch = design.typography.match(/([A-Z][a-z]+(?:\s[A-Z][a-z]+)*)/);
-    const fontFamily = fontMatch ? fontMatch[1] : 'Inter';
-
-    // Extract base font size (average if range)
-    const sizeMatch = design.typography.match(/(\d+)(?:-(\d+))?px/);
-    const fontSize = sizeMatch ? (sizeMatch[2] ? Math.round((parseInt(sizeMatch[1]) + parseInt(sizeMatch[2])) / 2) : parseInt(sizeMatch[1])) : 16;
-
-    // Extract font weight
-    const weightMatch = design.typography.match(/(\d{3})\s*weight/);
-    const fontWeight = weightMatch ? parseInt(weightMatch[1]) : 400;
-
-    // Extract letter spacing
-    const trackingMatch = design.typography.match(/([-\d.]+)em\s*tracking/);
-    const letterSpacing = trackingMatch ? trackingMatch[1] + 'em' : 'normal';
-
-    // Extract colors (hex codes)
-    const hexMatches = design.colors.match(/#[0-9A-Fa-f]{3,6}/g) || [];
-    const colorBg = hexMatches[0] || '#000000';
-    const colorText = hexMatches[1] || '#ffffff';
-    const colorAccent = hexMatches[2] || hexMatches[0] || '#5e6ad2';
-
-    // Extract max width
-    const widthMatch = design.layout.match(/(\d+)px/);
-    const maxWidth = widthMatch ? parseInt(widthMatch[1]) : 1200;
-
-    // Extract alignment
-    const alignment = design.layout.toLowerCase().includes('centered') ? 'centered' :
-                     design.layout.toLowerCase().includes('full') ? 'full-width' : 'left';
-
-    // Extract section spacing (average if range)
-    const spacingMatch = design.spacing.match(/(\d+)(?:-(\d+))?px/);
-    const sectionSpacing = spacingMatch ? (spacingMatch[2] ? Math.round((parseInt(spacingMatch[1]) + parseInt(spacingMatch[2])) / 2) : parseInt(spacingMatch[1])) : 100;
-
-    // Extract padding
-    const paddingMatch = design.spacing.match(/(\d+)px\s*padding/);
-    const padding = paddingMatch ? parseInt(paddingMatch[1]) : 40;
-
-    // Extract motion duration
-    const durationMatch = design.motion.match(/(\d+)ms/);
-    const motionDuration = durationMatch ? parseInt(durationMatch[1]) : 200;
-
-    // Extract motion style
-    const motionStyle = design.motion.toLowerCase().includes('fade') ? 'fade' :
-                       design.motion.toLowerCase().includes('slide') ? 'slide' :
-                       design.motion.toLowerCase().includes('snap') ? 'snap' : 'fade';
-
-    // Extract border info
-    const borderMatch = design.details.match(/(\d+)px\s*border/);
-    const borderWidth = design.details.toLowerCase().includes('no border') ? 0 : (borderMatch ? parseInt(borderMatch[1]) : 1);
-
-    // Extract border radius
-    const borderRadius = design.details.toLowerCase().includes('sharp') ||
-                        design.details.toLowerCase().includes('clean edges') ? 0 :
-                        design.details.toLowerCase().includes('rounded') ? 8 : 0;
-
-    return {
-      fontFamily,
-      fontSize,
-      fontWeight,
-      letterSpacing,
-      colorBg,
-      colorText,
-      colorAccent,
-      maxWidth,
-      alignment,
-      sectionSpacing,
-      padding,
-      motionDuration,
-      motionStyle,
-      borderWidth,
-      borderRadius
-    };
-  };
-
-  const generateYaml = () => {
-    // Build design inspirations section with embedded design specs AND parsed attributes
-    const inspirationsText = selectedExamples.length > 0
-      ? `\ndesign_inspirations:${selectedExamples.map(url => {
-          const example = ARCHETYPE_EXAMPLES.flatMap(a => a.examples).find(e => e.url === url);
-          if (!example) return '';
-          const attrs = parseDesignAttributes(example.design);
-          return `
-  - name: "${example.name}"
-    # Extracted attributes (use these programmatically)
-    attributes:
-      fontFamily: "${attrs.fontFamily}"
-      fontSize: ${attrs.fontSize}
-      fontWeight: ${attrs.fontWeight}
-      letterSpacing: "${attrs.letterSpacing}"
-      colorBg: "${attrs.colorBg}"
-      colorText: "${attrs.colorText}"
-      colorAccent: "${attrs.colorAccent}"
-      maxWidth: ${attrs.maxWidth}
-      alignment: "${attrs.alignment}"
-      sectionSpacing: ${attrs.sectionSpacing}
-      padding: ${attrs.padding}
-      motionDuration: ${attrs.motionDuration}
-      motionStyle: "${attrs.motionStyle}"
-      borderWidth: ${attrs.borderWidth}
-      borderRadius: ${attrs.borderRadius}
-    # Original descriptions (for reference)
-    descriptions:
-      typography: "${example.design.typography}"
-      colors: "${example.design.colors}"
-      layout: "${example.design.layout}"
-      spacing: "${example.design.spacing}"
-      motion: "${example.design.motion}"
-      details: "${example.design.details}"`;
-        }).join('')}`
-      : '';
-
-    const enabledSections = Object.entries(config.sections)
-      .filter(([, enabled]) => enabled)
-      .map(([key]) => key);
-
-    return `name: "${config.name || 'Your Name'}"
-email: "${config.email}"
-github: "${config.github}"
-linkedin: "${config.linkedin}"
-twitter: "${config.twitter}"
-website: "${config.website}"
-cli: "${config.cli}"
-
-sections:
-${enabledSections.map(s => `  - ${s}`).join('\n')}
-
-design:
-  creativity: ${config.design.creativity}
-  simplicity: ${config.design.simplicity}
-  playfulness: ${config.design.playfulness}
-  animation: ${config.design.animation}
-  color_intensity: ${config.design.color_intensity}${inspirationsText}
-
-content:
-  tone: "${config.content.tone}"
-  length: "${config.content.length}"
-  focus: "${config.content.focus}"
-
-ai:
-  quality_bar: ${config.ai.quality_bar}
-  research_depth: ${config.ai.research_depth}
-  copy_creativity: ${config.ai.copy_creativity}
-
-notes: |
-${config.notes.split('\n').map((line) => `  ${line}`).join('\n')}
-`;
-  };
-
   const downloadConfig = () => {
-    const yaml = generateYaml();
+    const yaml = generateProfileYaml(config, selectedExamples, ARCHETYPE_EXAMPLES);
     const blob = new Blob([yaml], { type: 'text/yaml' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -623,10 +201,6 @@ ${config.notes.split('\n').map((line) => `  ${line}`).join('\n')}
     URL.revokeObjectURL(url);
     setShowDownloadHelp(true);
   };
-
-  if (process.env.NODE_ENV === 'production') {
-    return null;
-  }
 
   // Loading state
   if (isLoading) {
@@ -643,7 +217,7 @@ ${config.notes.split('\n').map((line) => `  ${line}`).join('\n')}
   const steps = [
     { id: 'basics' as const, label: 'Basics', description: 'Name & contact info' },
     { id: 'design' as const, label: 'Design', description: 'Style & inspirations' },
-    { id: 'review' as const, label: 'Review', description: 'Save & generate' },
+    { id: 'review' as const, label: 'Review', description: 'Save your profile' },
   ];
 
   const currentStepIndex = steps.findIndex(s => s.id === currentStep);
@@ -671,7 +245,7 @@ ${config.notes.split('\n').map((line) => `  ${line}`).join('\n')}
                 <span className="font-semibold">Next Step</span>
               </div>
               <p className="text-neutral-400 text-sm mb-4">
-                Close this tab and return to your terminal. The AI will automatically start building your portfolio.
+                Close this tab and return to your terminal. The setup script will ask which AI tool you want to launch.
               </p>
             </div>
 
@@ -769,7 +343,7 @@ ${config.notes.split('\n').map((line) => `  ${line}`).join('\n')}
             <div className="flex items-center gap-3">
               <Check size={20} />
               <span className="font-medium">Config saved!</span>
-              <span className="text-green-100">Return to your terminal and press <kbd className="bg-green-700 px-2 py-0.5 rounded text-xs font-mono">Ctrl+C</kbd> to continue.</span>
+              <span className="text-green-100">Return to your terminal. The setup script will continue.</span>
             </div>
             <button
               onClick={() => setConfigSaved(false)}
@@ -792,7 +366,7 @@ ${config.notes.split('\n').map((line) => `  ${line}`).join('\n')}
                   <h2 className="font-bold text-lg mb-2">Let&apos;s start with the basics</h2>
                   <p className="text-neutral-400 text-sm leading-relaxed">
                     Only your <span className="text-white font-medium">name</span> is required.
-                    The AI will research and fill in everything else.
+                    Your coding agent can ask before researching any missing details.
                   </p>
                 </div>
               </div>
@@ -868,6 +442,8 @@ ${config.notes.split('\n').map((line) => `  ${line}`).join('\n')}
                     <option value="gemini">Google Gemini CLI</option>
                     <option value="aider">Aider</option>
                     <option value="cursor">Cursor AI</option>
+                    <option value="windsurf">Windsurf</option>
+                    <option value="antigravity">Antigravity</option>
                     <option value="other">Other / Custom</option>
                   </select>
                   <p className="text-xs text-neutral-500 mt-1.5">Which AI coding assistant will build your portfolio?</p>
@@ -973,7 +549,7 @@ ${config.notes.split('\n').map((line) => `  ${line}`).join('\n')}
                 Materials
               </h2>
               <p className="text-neutral-400 text-sm mb-4">
-                Upload resumes, headshots, or other files for the AI to use.
+                Add local files for your coding agent to use. Maximum 10 MB each. Review them before pushing to a public repository.
               </p>
 
               <div className="space-y-3">
@@ -999,7 +575,7 @@ ${config.notes.split('\n').map((line) => `  ${line}`).join('\n')}
                 {/* Images upload */}
                 <label className="flex items-center gap-3 p-4 bg-neutral-900 border border-neutral-800 rounded-lg cursor-pointer hover:border-neutral-600 transition-colors">
                   <div className="w-10 h-10 bg-neutral-800 rounded-lg flex items-center justify-center">
-                    <Image size={20} className="text-neutral-400" />
+                    <ImageIcon size={20} className="text-neutral-400" />
                   </div>
                   <div className="flex-1">
                     <div className="font-medium text-sm">Upload Images</div>
@@ -1009,7 +585,7 @@ ${config.notes.split('\n').map((line) => `  ${line}`).join('\n')}
                   <input
                     type="file"
                     className="hidden"
-                    accept=".jpg,.jpeg,.png,.webp,.gif,.svg"
+                    accept=".jpg,.jpeg,.png,.webp,.gif"
                     multiple
                     onChange={(e) => handleFileUpload(e, 'images')}
                   />
@@ -1022,6 +598,12 @@ ${config.notes.split('\n').map((line) => `  ${line}`).join('\n')}
                   <div className="w-4 h-4 border-2 border-neutral-600 border-t-white rounded-full animate-spin" />
                   Uploading...
                 </div>
+              )}
+
+              {uploadError && (
+                <p className="mt-3 text-sm text-red-400" role="alert">
+                  {uploadError}
+                </p>
               )}
 
               {/* Uploaded files list */}
@@ -1038,6 +620,8 @@ ${config.notes.split('\n').map((line) => `  ${line}`).join('\n')}
                       <span className="text-xs text-neutral-600">{file.folder}</span>
                       <button
                         onClick={() => removeUploadedFile(file.path)}
+                        type="button"
+                        aria-label={`Delete ${file.name}`}
                         className="p-1 hover:bg-neutral-800 rounded transition-colors"
                       >
                         <X size={14} className="text-neutral-500" />
@@ -1120,10 +704,11 @@ ${config.notes.split('\n').map((line) => `  ${line}`).join('\n')}
                             : 'border-neutral-800 hover:border-neutral-600'
                         }`}
                       >
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
+                        <Image
                           src={example.screenshot}
                           alt={example.name}
+                          fill
+                          sizes="(max-width: 768px) 33vw, 300px"
                           className="w-full h-full object-cover object-top"
                           loading="lazy"
                           onError={(e) => {
@@ -1323,13 +908,17 @@ ${config.notes.split('\n').map((line) => `  ${line}`).join('\n')}
               <p className="text-neutral-400 mb-6">
                 {hasExistingConfig
                   ? 'Your changes will be saved to profile.yaml'
-                  : 'Save your config and the AI will start building your portfolio'}
+                  : 'Save your profile, then return to the setup script to choose your coding agent'}
               </p>
 
           {/* Primary action - Save to Project */}
           <button
             onClick={async () => {
-              const yaml = generateYaml();
+              if (!config.name.trim()) {
+                setCurrentStep('basics');
+                return;
+              }
+                  const yaml = generateProfileYaml(config, selectedExamples, ARCHETYPE_EXAMPLES);
               try {
                 const res = await fetch('/api/save-config', {
                   method: 'POST',
@@ -1345,7 +934,8 @@ ${config.notes.split('\n').map((line) => `  ${line}`).join('\n')}
                 alert('Failed to save. Try Download instead.');
               }
             }}
-            className="bg-green-600 text-white px-8 py-4 rounded-lg hover:bg-green-700 transition-colors font-semibold text-lg flex items-center gap-3 mx-auto"
+            disabled={!config.name.trim()}
+            className="bg-green-600 text-white px-8 py-4 rounded-lg hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50 transition-colors font-semibold text-lg flex items-center gap-3 mx-auto"
           >
             <Check size={24} />
             Save to Project

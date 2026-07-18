@@ -9,8 +9,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "Personal portfolio",
+  title: "Persona — A portfolio starter kit for coding agents",
+  description: "Build a personal portfolio that feels designed around you, not filled into a template.",
 };
 
 export default function RootLayout({

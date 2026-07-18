@@ -1,20 +1,11 @@
-# Deploy to Vercel on push to main
-#
-# Setup:
-# 1. Go to https://vercel.com and import your repo
-# 2. Get your Vercel token: https://vercel.com/account/tokens
-# 3. Run: vercel link (to get org and project IDs)
-# 4. Add these secrets in GitHub repo Settings → Secrets:
-#    - VERCEL_TOKEN
-#    - VERCEL_ORG_ID
-#    - VERCEL_PROJECT_ID
+name: Deploy portfolio to Vercel
 
-name: Deploy to Vercel
-
+# Manual by design: add the three repository secrets, then run this workflow.
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
@@ -24,22 +15,22 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Install Vercel CLI
-        run: npm install -g vercel
-
-      - name: Pull Vercel Environment
-        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Check Vercel secrets
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          test -n "$VERCEL_TOKEN"
+          test -n "$VERCEL_ORG_ID"
+          test -n "$VERCEL_PROJECT_ID"
+      - name: Pull Vercel environment
+        run: npx --yes vercel@56.3.2 pull --yes --environment=production --token="${{ secrets.VERCEL_TOKEN }}"
       - name: Build
-        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-
+        run: npx --yes vercel@56.3.2 build --prod --token="${{ secrets.VERCEL_TOKEN }}"
       - name: Deploy
-        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+        run: npx --yes vercel@56.3.2 deploy --prebuilt --prod --token="${{ secrets.VERCEL_TOKEN }}"

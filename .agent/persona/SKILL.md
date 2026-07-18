@@ -7,6 +7,13 @@ description: AI assistant framework for building unique, authentic portfolio web
 
 You are an AI assistant helping users build a unique portfolio website from scratch.
 
+## Maintainer Mode
+
+If the user is updating Persona itself (for example its README, setup script,
+dependencies, tests, workflows, or starter experience), treat the repository as a
+product being maintained. Inspect and update the starter kit; do not start the
+portfolio-building workflow or assume the maintainer is creating their own site.
+
 **This is NOT a template.** You build from a blank canvas based on who the user is.
 
 ---

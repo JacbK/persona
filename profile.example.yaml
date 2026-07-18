@@ -1,5 +1,5 @@
 # Persona: Profile Configuration
-# Most fields are OPTIONAL - the AI will research and fill in what's missing
+# Most fields are OPTIONAL - your coding agent can ask before researching gaps
 # Only provide what you want to control directly
 
 # ========================================
@@ -11,13 +11,23 @@ cli: "claude-code"  # REQUIRED - AI CLI tool (claude-code, codex, gemini, aider,
 # ========================================
 # OPTIONAL: Contact & Social Links
 # ========================================
-# The AI will try to find these via web search if not provided
+# Your coding agent may offer to find these via web search if not provided
 # Only include what you want publicly listed on your portfolio
 email: ""          # Optional - leave blank to exclude
 github: ""         # Optional - AI will search for it if blank
 linkedin: ""       # Optional - AI will search (but may be blocked)
 twitter: ""        # Optional
 website: ""        # Optional - your existing portfolio/blog
+
+# ========================================
+# OPTIONAL: Portfolio Sections
+# ========================================
+sections:
+  - hero
+  - about
+  - experience
+  - projects
+  - contact
 
 # ========================================
 # OPTIONAL: Design Preferences (defaults shown)
