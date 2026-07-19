@@ -126,6 +126,12 @@ main {
     line-height: 1.6;
 }
 
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
 .btn {
     display: inline-block;
     background: var(--text);
@@ -152,6 +158,16 @@ main {
 
 .github-btn:hover {
     background: #2f363d;
+}
+
+.repo-btn {
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text);
+}
+
+.repo-btn:hover {
+    background: white;
 }
 
 /* Terminal */
@@ -290,6 +306,16 @@ footer a:hover {
 
     .hero-title {
         font-size: clamp(2.25rem, 11vw, 3rem);
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .hero-actions .btn {
+        display: inline-flex;
+        justify-content: center;
     }
 
     .cli-logo {
