@@ -19,23 +19,23 @@
     "clean": "rm -rf .next"
   },
   "dependencies": {
-    "js-yaml": "^5.2.1",
-    "lucide-react": "^1.25.0",
-    "next": "16.2.10",
-    "pdf2json": "^4.0.3",
-    "react": "19.2.7",
-    "react-dom": "19.2.7"
+    "js-yaml": "^5.4.2",
+    "lucide-react": "^1.46.0",
+    "next": "16.3.5",
+    "pdf2json": "^4.1.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.3",
-    "@types/node": "^22.20.1",
-    "@types/react": "^19.2.17",
-    "@types/react-dom": "^19.2.3",
-    "eslint": "^9.39.5",
-    "eslint-config-next": "^16.2.10",
+    "@types/node": "^26.6.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "eslint": "^10.10.0",
+    "eslint-config-next": "^16.3.5",
     "tailwindcss": "^4.3.3",
-    "typescript": "^6.0.3",
-    "vitest": "^4.1.10"
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.1"
   },
   "overrides": {
     "flatted": "3.4.2",
